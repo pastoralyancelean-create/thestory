@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Yance &amp; Sofia</title>
-    <link rel="icon" type="image/x-icon" href="favicon1.ico">
+    <link rel="icon" id="dynamicFavicon" type="image/png" href="favicon1.ico">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
@@ -73,7 +73,7 @@
         ============================================================ */
         .navbar {
             display: flex;
-            justify-content: space-between;
+            justify-content: flex-end;
             align-items: center;
             padding: 0 7%;
             height: 68px;
@@ -125,51 +125,12 @@
             letter-spacing: 0.5px;
         }
 
-        /* Desktop nav links */
-        .nav-links {
-            display: flex;
-            list-style: none;
-            gap: 8px;
-            align-items: center;
-        }
-        .nav-links a {
-            color: var(--text-dim);
-            text-decoration: none;
-            font-size: 0.88rem;
-            font-weight: 500;
-            padding: 7px 14px;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            gap: 7px;
-            transition: color var(--t-fast), background var(--t-fast);
-        }
-        .nav-links a i { font-size: 0.82rem; }
-        .nav-links a:hover {
-            color: var(--text);
-            background: var(--bg-card-h);
-        }
-        .nav-links a.active {
-            color: var(--green);
-            background: rgba(0,201,167,0.1);
-        }
-        .nav-links .nav-btn {
-            padding: 7px 18px;
-            background: var(--grad-main);
-            color: #fff !important;
-            border-radius: 8px;
-            font-weight: 600;
-        }
-        .nav-links .nav-btn:hover {
-            background: var(--grad-main);
-            opacity: 0.88;
-            transform: translateY(-1px);
-            box-shadow: 0 6px 20px rgba(0,201,167,.3);
-        }
+        /* Desktop nav links — hidden always, hamburger only */
+        .nav-links { display: none; }
 
         /* Hamburger */
         .hamburger {
-            display: none;
+            display: flex;
             flex-direction: column;
             justify-content: center;
             gap: 5px;
@@ -862,16 +823,6 @@
             gap: 14px;
         }
 
-        .footer-logo {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.5rem;
-            font-weight: 700;
-            background: var(--grad-main);
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
         .footer-links {
             display: flex;
             gap: 20px;
@@ -899,25 +850,30 @@
 
         .footer-socials {
             display: flex;
-            gap: 10px;
+            gap: 12px;
+            flex-wrap: wrap;
+            justify-content: center;
         }
         .footer-socials a {
-            width: 34px; height: 34px;
-            border-radius: 8px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 18px;
+            border-radius: 10px;
             background: var(--bg-card);
             border: 1px solid var(--border);
-            display: flex;
-            align-items: center;
-            justify-content: center;
             color: var(--text-dim);
             font-size: 0.85rem;
             text-decoration: none;
-            transition: background var(--t-fast), color var(--t-fast), border-color var(--t-fast);
+            transition: background var(--t-fast), color var(--t-fast), border-color var(--t-fast), transform var(--t-fast);
         }
+        .footer-socials a i { font-size: 1rem; color: #E1306C; }
+        .footer-socials a span { font-size: 0.82rem; font-weight: 500; }
         .footer-socials a:hover {
-            background: var(--grad-soft);
-            border-color: rgba(0,201,167,.35);
-            color: var(--green);
+            background: rgba(225,48,108,.1);
+            border-color: rgba(225,48,108,.35);
+            color: var(--text);
+            transform: translateY(-2px);
         }
 
         /* ============================================================
@@ -962,8 +918,6 @@
            RESPONSIVE
         ============================================================ */
         @media (max-width: 768px) {
-            .nav-links { display: none; }
-            .hamburger { display: flex; }
             section { padding: 80px 5%; }
             .glass-card { padding: 32px 22px; }
             .detail-top { flex-direction: column; text-align: center; align-items: center; }
@@ -984,19 +938,6 @@
          NAVBAR
     ============================================================ -->
     <header class="navbar" id="navbar">
-        <a href="#home" class="logo">
-            <div class="logo-icon">Y&S</div>
-            <span class="logo-text">Yance &amp; Sofia</span>
-        </a>
-
-        <nav>
-            <ul class="nav-links">
-                <li><a href="#home" class="active"><i class="fa-solid fa-house"></i> Home</a></li>
-                <li><a href="#gallery"><i class="fa-solid fa-images"></i> Gallery</a></li>
-                <li><a href="#" id="aboutBtn" class="nav-btn"><i class="fa-solid fa-user-group"></i> About Us</a></li>
-            </ul>
-        </nav>
-
         <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
             <span></span><span></span><span></span>
         </button>
@@ -1147,8 +1088,6 @@
          FOOTER
     ============================================================ -->
     <footer>
-        <div class="footer-logo">Y &amp; S</div>
-
         <ul class="footer-links">
             <li><a href="#home">Home</a></li>
             <li><a href="#gallery">Gallery</a></li>
@@ -1156,14 +1095,17 @@
         </ul>
 
         <div class="footer-socials">
-            <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
-            <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
-            <a href="#" aria-label="Twitter"><i class="fa-brands fa-x-twitter"></i></a>
+            <a href="https://www.instagram.com/liiyansi" target="_blank" rel="noopener" aria-label="Yance's Instagram">
+                <i class="fa-brands fa-instagram"></i>
+                <span>@liiyansi</span>
+            </a>
+            <a href="https://www.instagram.com/snaeichi" target="_blank" rel="noopener" aria-label="Sofia's Instagram">
+                <i class="fa-brands fa-instagram"></i>
+                <span>@snaeichi</span>
+            </a>
         </div>
 
-        <p class="footer-copy">
-            Crafted with <span class="heart">&#9829;</span> by Yance &amp; Sofia &mdash; PUP Students
-        </p>
+
     </footer>
 
     <!-- ============================================================
@@ -1207,9 +1149,6 @@
         /* ===========================
            About Modal triggers
         =========================== */
-        document.getElementById("aboutBtn").addEventListener("click", e => {
-            e.preventDefault(); openAboutModal();
-        });
         document.getElementById("aboutBtnMob").addEventListener("click", e => {
             e.preventDefault(); closeMobileMenu(); openAboutModal();
         });
@@ -1340,6 +1279,48 @@
                 if (a.getAttribute("href") === `#${current}`) a.classList.add("active");
             });
         });
+    </script>
+    <!-- Dynamic circular favicon from photo1.jpg -->
+    <script>
+        (function() {
+            const img = new Image();
+            img.src = 'photo1.jpg';
+            img.onload = function() {
+                const size = 64;
+                const canvas = document.createElement('canvas');
+                canvas.width = size;
+                canvas.height = size;
+                const ctx = canvas.getContext('2d');
+
+                // Circular clip
+                ctx.beginPath();
+                ctx.arc(size / 2, size / 2, size / 2, 0, Math.PI * 2);
+                ctx.closePath();
+                ctx.clip();
+
+                // Draw image centered and cropped
+                const aspect = img.width / img.height;
+                let sx, sy, sw, sh;
+                if (aspect > 1) {
+                    sh = img.height;
+                    sw = img.height;
+                    sx = (img.width - sw) / 2;
+                    sy = 0;
+                } else {
+                    sw = img.width;
+                    sh = img.width;
+                    sx = 0;
+                    sy = (img.height - sh) / 2;
+                }
+                ctx.drawImage(img, sx, sy, sw, sh, 0, 0, size, size);
+
+                const favicon = document.getElementById('dynamicFavicon');
+                favicon.href = canvas.toDataURL('image/png');
+            };
+            img.onerror = function() {
+                // Falls back to favicon1.ico silently
+            };
+        })();
     </script>
 </body>
 </html>
